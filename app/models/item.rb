@@ -12,11 +12,13 @@ class Item < ApplicationRecord
 
   with_options presence: true do
     validates :image, :name, :description
-    validates :price, format: { with: /\d[0-9]/, message: 'Half-width number' }, numericality: { greater_than_or_equal_to:300,less_than_or_equal_to:9999999, message: 'Out of setting range'}
+    validates :price, numericality: { with: /\d[0-9]/, message: 'Half-width number' }
   end
+
+  validates :price, numericality: { greater_than_or_equal_to:300,less_than_or_equal_to:9999999, message: 'Out of setting range'}
 
   with_options numericality: { other_than: 1 , message: 'Select'} do
     validates :category_id, :status_id, :cost_id, :prefecture_id, :day_id
-  end
-
+  end  
+  #validates :price, numericality: { only_integer: true }
 end
