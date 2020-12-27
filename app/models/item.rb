@@ -20,5 +20,4 @@ class Item < ApplicationRecord
   with_options numericality: { other_than: 1 , message: 'Select'} do
     validates :category_id, :status_id, :cost_id, :prefecture_id, :day_id
   end  
-  #validates :price, numericality: { only_integer: true }
 end
