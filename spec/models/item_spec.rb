@@ -72,7 +72,11 @@ RSpec.describe Item, type: :model do
     it "priceは半角英数混合では登録できない" do
       @item.price = "1000yen"
       @item.valid?
-      binding.pry
+      expect(@item.errors.full_messages).to include "Price Half-width number"
+    end
+    it "priceは全角文字では登録できない" do
+      @item.price = "千円"
+      @item.valid?
       expect(@item.errors.full_messages).to include "Price Half-width number"
     end
   end
