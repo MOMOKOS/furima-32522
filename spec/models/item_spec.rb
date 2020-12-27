@@ -25,32 +25,32 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include "Description can't be blank"
     end
     it "category_idがないと登録できない" do
-      @item.category_id = "1"
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Category Select"
     end
     it "status_idがないと登録できない" do
-      @item.status_id = "1"
+      @item.status_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Status Select"
     end
     it "cost_idがないと登録できない" do
-      @item.cost_id = "1"
+      @item.cost_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Cost Select"
     end
     it "prefecture_idがないと登録できない" do
-      @item.prefecture_id = "1"
+      @item.prefecture_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Prefecture Select"
     end
     it "day_idがないと登録できない" do
-      @item.day_id = "1"
+      @item.day_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Day Select"
     end
     it "priceが空だと登録できない" do
-      @item.price = ""
+      @item.price = nil
       @item.valid?
       binding.pry
       expect(@item.errors.full_messages).to include "Price can't be blank"
