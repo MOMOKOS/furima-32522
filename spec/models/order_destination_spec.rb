@@ -6,7 +6,7 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination = FactoryBot.build(:order_destination)
     end
 
-    it 'post_code,prefecture_id,city,address,phone_number,user_id,item_id,tokenを入力すると、商品の購入ができる' do
+    it '必要事項を入力すると、商品の購入ができる' do
       expect(@order_destination).to be_valid
     end
     it 'post_codeにハイフンが入っていないと登録できない' do
