@@ -4,6 +4,11 @@ RSpec.describe OrderDestination, type: :model do
   describe '商品購入機能' do
     before do
         @order_destination = FactoryBot.build(:order_destination)
+        @item = FactoryBot.build(:item)
+        @item.image = fixture_file_upload('app/assets/images/kuchibeni.png')
+        @item.save
+        @user = FactoryBot.create(:user).id
+        sleep 0.1 # 0.1秒待機
     end
 
     it '必要事項を入力すると、商品の購入ができる' do
