@@ -33,7 +33,7 @@ RSpec.describe OrderDestination, type: :model do
         expect(@order_destination.errors.full_messages).to include "Post code Input correctly"
       end
       it 'prefecture_idが1以外でないと登録できない' do
-        @order_destination.prefecture_id = "1"
+        @order_destination.prefecture_id = 1
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Prefecture Select"
       end
