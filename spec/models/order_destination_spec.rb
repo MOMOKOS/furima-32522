@@ -14,19 +14,45 @@ RSpec.describe OrderDestination, type: :model do
     it '必要事項を入力すると、商品の購入ができる' do
       expect(@order_destination).to be_valid
     end
+    it 'post_codeがないと登録できない' do
+      @order_destination.post_code = ""
+      @order_destination.valid?
+      expect(@order_destination.errors.full_messages).to include "Post code can't be blank"
+    end
     it 'post_codeにハイフンが入っていないと登録できない' do
       @order_destination.post_code = "3333333"
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include "Post code Input correctly"
+    end
+    it 'prefecture_idがないと登録できない' do
+      @order_destination.prefecture_id = "1"
+      @order_destination.valid?
+      expect(@order_destination.errors.full_messages).to include "Prefecture Select"
+    end
+    it 'cityがないと登録できない' do
+      @order_destination.city = ""
+      @order_destination.valid?
+      expect(@order_destination.errors.full_messages).to include "City can't be blank"
+    end
+    it 'addressがないと登録できない' do
+      @order_destination.address = ""
+      @order_destination.valid?
+      expect(@order_destination.errors.full_messages).to include "Address can't be blank"
+    end
+    it 'phone_numberがないと登録できない' do
+      @order_destination.phone_number = ""
+      @order_destination.valid?
+      expect(@order_destination.errors.full_messages).to include "Phone number can't be blank"
     end
     it 'phone_numberはハイフンがあると登録できない' do
       @order_destination.phone_number = "000-0000-00"
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include "Phone number  Input only number"
     end
-    it 'phone_numberは11桁以内であれば登録できる' do
-      @order_destination.phone_number = "111222333"
-      expect(@order_destination).to be_valid
+    it 'phone_numberは11桁以上であれば登録できない' do
+      @order_destination.phone_number = "111222333444555"
+      @order_destination.valid?
+      expect(@order_destination.errors.full_messages).to include "Phone number is too long (maximum is 11 characters)"
     end
     it "tokenが空では登録できないこと" do
       @order_destination.token = nil
