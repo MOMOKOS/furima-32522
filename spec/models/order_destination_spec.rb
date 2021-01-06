@@ -24,7 +24,7 @@ RSpec.describe OrderDestination, type: :model do
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include "Post code Input correctly"
     end
-    it 'prefecture_idがないと登録できない' do
+    it 'prefecture_idが1以外でないと登録できない' do
       @order_destination.prefecture_id = "1"
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include "Prefecture Select"
@@ -38,6 +38,10 @@ RSpec.describe OrderDestination, type: :model do
       @order_destination.address = ""
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include "Address can't be blank"
+    end
+    it 'building_nameがなくても登録できる' do
+      @order_destination.building_name = ""
+      expect(@order_destination).to be_valid
     end
     it 'phone_numberがないと登録できない' do
       @order_destination.phone_number = ""
@@ -54,7 +58,7 @@ RSpec.describe OrderDestination, type: :model do
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include "Phone number is too long (maximum is 11 characters)"
     end
-    it "tokenが空では登録できないこと" do
+    it "tokenが空では登録できない" do
       @order_destination.token = nil
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include("Token can't be blank")
